@@ -1,0 +1,659 @@
+﻿<Window
+    x:Class="Calculator.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Calculator"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="T&amp;M 水月仙术杯计分器"
+    Width="903"
+    Height="685"
+    mc:Ignorable="d">
+    <Grid>
+        <Border
+            x:Name="SpecialAwardsBorder"
+            Width="461"
+            Height="158"
+            Margin="27,467,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="Black"
+            BorderThickness="1" />
+
+
+        <Border
+            x:Name="Emergency_Border"
+            Width="839"
+            Height="116"
+            Margin="27,325,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="Black"
+            BorderThickness="1" />
+
+
+        <Border
+            x:Name="OnRouteLabelBorder"
+            Width="839"
+            Height="141"
+            Margin="27,160,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            BorderBrush="Black"
+            BorderThickness="1" />
+        <Label
+            x:Name="CurrentPlayer"
+            Width="46"
+            Height="25"
+            Margin="23,18,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="选手："
+            FontWeight="Bold" />
+        <TextBox
+            x:Name="PlayerID"
+            Width="379"
+            Height="20"
+            Margin="69,22,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="Difficulty"
+            Width="46"
+            Height="25"
+            Margin="465,18,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="难度："
+            FontWeight="Bold" />
+        <TextBox
+            x:Name="Difficulty_Value"
+            Width="350"
+            Height="20"
+            Margin="513,22,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            LostKeyboardFocus="Difficulty_Value_LostKeyboardFocus"
+            PreviewKeyDown="Difficulty_Value_PreviewKeyDown"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="Squads"
+            Width="46"
+            Height="25"
+            Margin="23,51,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="分队："
+            FontWeight="Bold" />
+        <TextBox
+            x:Name="Squad"
+            Width="379"
+            Height="20"
+            Margin="69,55,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="Endings"
+            Width="46"
+            Height="25"
+            Margin="24,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="结局："
+            FontWeight="Bold" />
+        <Label
+            x:Name="Ending"
+            Width="180"
+            Height="25"
+            Margin="70,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="{x:Null}"
+            Content="" />
+        <Button
+            x:Name="HighMore"
+            Width="80"
+            Height="25"
+            Margin="270,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="HighMore_Click"
+            Content="海沫" />
+        <Button
+            x:Name="Qishi"
+            Width="80"
+            Height="25"
+            Margin="355,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Qishi_Click"
+            Content="骑士" />
+        <Button
+            x:Name="Skadi"
+            Width="80"
+            Height="25"
+            Margin="440,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Skadi_Click"
+            Content="蒂蒂" />
+        <Button
+            x:Name="Mizuki"
+            Width="80"
+            Height="25"
+            Margin="525,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Mizuki_Click"
+            Content="水月" />
+        <Button
+            x:Name="Xiuchui"
+            Width="80"
+            Height="25"
+            Margin="610,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Xiuchui_Click"
+            Content="锈锤" />
+        <Button
+            x:Name="Hanzai"
+            Width="80"
+            Height="25"
+            Margin="695,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Hanzai_Click"
+            Content="寒灾" />
+        <Button
+            x:Name="Mubei"
+            Width="80"
+            Height="25"
+            Margin="780,102,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Mubei_Click"
+            Content="墓碑" />
+        <Label
+            x:Name="OnRouteLabel"
+            Width="58"
+            Height="25"
+            Margin="39,147,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="White"
+            Content="道中加分"
+            FontWeight="Bold" />
+        <Button
+            x:Name="TemporaryRecruit_6_Star_Add"
+            Width="113"
+            Height="25"
+            Margin="236,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_6_Star_Add_Click"
+            Content="+1" />
+        <Label
+            x:Name="Oprator_6_Star_Label"
+            Width="46"
+            Height="25"
+            Margin="148,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="六星：" />
+        <Label
+            x:Name="OnRoute_TemporaryRecruitLabel"
+            Width="58"
+            Height="25"
+            Margin="51,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="临时招募"
+            FontWeight="Bold" />
+        <Label
+            x:Name="Counter_6_Star"
+            Width="17"
+            Height="25"
+            Margin="199,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="0" />
+        <Button
+            x:Name="TemporaryRecruit_6_Star_Sub"
+            Width="113"
+            Height="25"
+            Margin="355,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_6_Star_Sub_Click"
+            Content="-1" />
+        <Button
+            x:Name="TemporaryRecruit_5_Star_Add"
+            Width="113"
+            Height="25"
+            Margin="592,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_5_Star_Add_Click"
+            Content="+1" />
+        <Label
+            x:Name="Oprator_5_Star_Label"
+            Width="46"
+            Height="25"
+            Margin="504,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="五星：" />
+        <Label
+            x:Name="Counter_5_Star"
+            Width="17"
+            Height="25"
+            Margin="555,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="0" />
+        <Button
+            x:Name="TemporaryRecruit_5_Star_Sub"
+            Width="113"
+            Height="25"
+            Margin="711,177,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_5_Star_Sub_Click"
+            Content="-1" />
+        <Button
+            x:Name="TemporaryRecruit_4_Star_Add"
+            Width="113"
+            Height="25"
+            Margin="236,216,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_4_Star_Add_Click"
+            Content="+1" />
+        <Label
+            x:Name="Oprator_4_Star_Label"
+            Width="46"
+            Height="25"
+            Margin="148,216,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="四星：" />
+        <Label
+            x:Name="Counter_4_Star"
+            Width="17"
+            Height="25"
+            Margin="199,216,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="0" />
+        <Button
+            x:Name="TemporaryRecruit_4_Star_Sub"
+            Width="113"
+            Height="25"
+            Margin="355,216,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="TemporaryRecruit_4_Star_Sub_Click"
+            Content="-1" />
+        <Label
+            x:Name="OnRoute_OthersLabel"
+            Width="34"
+            Height="25"
+            Margin="63,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="其他"
+            FontWeight="Bold" />
+        <Button
+            x:Name="ConCeal_Add"
+            Width="113"
+            Height="25"
+            Margin="236,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ConCeal_Add_Click"
+            Content="+1" />
+        <Label
+            x:Name="Conceal_Label"
+            Width="68"
+            Height="25"
+            Margin="136,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="鸭/熊/狗：" />
+        <Label
+            x:Name="Counter_Conceal"
+            Width="17"
+            Height="25"
+            Margin="199,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="0" />
+        <Button
+            x:Name="Conceal_Sub"
+            Width="113"
+            Height="25"
+            Margin="355,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Conceal_Sub_Click"
+            Content="-1" />
+        <Button
+            x:Name="Enlightenment_Add"
+            Width="113"
+            Height="25"
+            Margin="592,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Enlightenment_Add_Click"
+            Content="+1" />
+        <Label
+            x:Name="Enlightenment_Label"
+            Width="46"
+            Height="25"
+            Margin="504,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="启示：" />
+        <Label
+            x:Name="Counter_Enlightenment"
+            Width="17"
+            Height="25"
+            Margin="555,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="0" />
+        <Button
+            x:Name="Enlightenment_Sub"
+            Width="113"
+            Height="25"
+            Margin="711,255,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Enlightenment_Sub_Click"
+            Content="-1" />
+        <Label
+            x:Name="Difficulty_OutOfValue_Info"
+            Width="350"
+            Height="25"
+            Margin="513,47,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content=""
+            FontWeight="Bold"
+            Foreground="Red" />
+        <Label
+            x:Name="Emergency_Label"
+            Width="58"
+            Height="25"
+            Margin="39,311,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="White"
+            Content="紧急作战"
+            FontWeight="Bold" />
+        <Button
+            x:Name="Chongyuzhixv_Button"
+            Width="120"
+            Height="25"
+            Margin="200,352,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Chongyuzhixv_Button_Click"
+            Content="铳与秩序" />
+        <Button
+            x:Name="LingDiYiShi_Button"
+            Width="120"
+            Height="25"
+            Margin="330,352,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="LingDiYiShi_Button_Click"
+            Content="领地意识" />
+        <Button
+            x:Name="ShouLieChang_Button"
+            Width="120"
+            Height="25"
+            Margin="460,352,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ShouLieChang_Button_Click"
+            Content="狩猎场" />
+        <Button
+            x:Name="ShiKong_Button"
+            Width="120"
+            Height="25"
+            Margin="590,352,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="ShiKong_Button_Click"
+            Content="失控" />
+        <Button
+            x:Name="Yushengchi_Button"
+            Width="120"
+            Height="25"
+            Margin="720,352,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Yushengchi_Button_Click"
+            Content="育生池" />
+        <Button
+            x:Name="Haomengzaihefang_Button"
+            Width="120"
+            Height="25"
+            Margin="200,392,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Haomengzaihefang_Button_Click"
+            Content="好梦在何方" />
+        <Button
+            x:Name="JIxiezhizai_Button"
+            Width="120"
+            Height="25"
+            Margin="330,392,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="JIxiezhizai_Button_Click"
+            Content="机械之灾" />
+        <Button
+            x:Name="Yujinfangzhen_Button"
+            Width="120"
+            Height="25"
+            Margin="460,392,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Yujinfangzhen_Button_Click"
+            Content="余烬方阵" />
+        <Button
+            x:Name="Shuohuoxiangrong_Button"
+            Width="120"
+            Height="25"
+            Margin="590,392,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Shuohuoxiangrong_Button_Click"
+            Content="水火相容" />
+        <Button
+            x:Name="Shendurenzhi_Button"
+            Width="120"
+            Height="25"
+            Margin="720,392,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Shendurenzhi_Button_Click"
+            Content="深度认知" />
+        <Label
+            x:Name="Special_Label"
+            Width="58"
+            Height="25"
+            Margin="39,454,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="White"
+            Content="特殊加分"
+            FontWeight="Bold" />
+        <ListBox
+            x:Name="EmergencyLevelList"
+            Width="115"
+            Height="80"
+            Margin="51,344,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <ListBox
+            x:Name="SpecialAwardList"
+            Width="115"
+            Height="116"
+            Margin="51,484,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
+        <Button
+            x:Name="Zhenxiangtongguan_Button"
+            Width="136"
+            Height="25"
+            Margin="184,485,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Zhenxiangtongguan_Button_Click"
+            Content="真相通关" />
+        <Button
+            x:Name="Zhenxiangwulou_Button"
+            Width="136"
+            Height="25"
+            Margin="332,485,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Zhenxiangwulou_Button_Click"
+            Content="真相无漏" />
+        <Button
+            x:Name="Tiaowutongguan_Button"
+            Width="136"
+            Height="25"
+            Margin="184,530,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Tiaowutongguan_Button_Click"
+            Content="跳舞通关" />
+        <Button
+            x:Name="Tiaowuwulou_Xiangziquanshou_Button"
+            Width="136"
+            Height="25"
+            Margin="332,530,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Tiaowuwulou_Xiangziquanshou_Button_Click"
+            Content="跳舞无漏+箱子全收" />
+        <Button
+            x:Name="Yabenyunzuo_Button"
+            Width="136"
+            Height="25"
+            Margin="184,575,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Yabenyunzuo_Button_Click"
+            Content="鸭本运作" />
+        <Button
+            x:Name="Jiangongxianchangshaya_Button"
+            Width="136"
+            Height="25"
+            Margin="332,575,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Jiangongxianchangshaya_Button_Click"
+            Content="监工现场杀鸭" />
+        <Image
+            x:Name="Kaze"
+            Width="133"
+            Height="86"
+            Margin="735,542,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" Source="./resource/kaze.jpg" />
+        <Label
+            x:Name="Collection_Label"
+            Width="58"
+            Height="25"
+            Margin="513,464,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="藏品数："
+            FontWeight="Bold" />
+        <TextBox
+            x:Name="Collections_Amount"
+            Width="290"
+            Height="20"
+            Margin="576,467,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            LostKeyboardFocus="Collections_Amount_LostKeyboardFocus"
+            PreviewKeyDown="Collections_Amount_PreviewKeyDown"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="GameScore_Label"
+            Width="70"
+            Height="25"
+            Margin="513,504,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="通关分数："
+            FontWeight="Bold" />
+        <TextBox
+            x:Name="GameScore_TextBox"
+            Width="290"
+            Height="20"
+            Margin="576,507,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            LostKeyboardFocus="Difficulty_Value_LostKeyboardFocus"
+            PreviewKeyDown="Difficulty_Value_PreviewKeyDown"
+            TextWrapping="Wrap" />
+        <Label
+            x:Name="TotalScore_Label"
+            Width="70"
+            Height="25"
+            Margin="513,552,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="最终分数："
+            FontWeight="Bold" />
+        <TextBlock
+            x:Name="TotalScore_TextBlock"
+            Width="145"
+            Height="31"
+            Margin="576,549,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#FFEEEEEE"
+            FontFamily="Arial Black"
+            FontSize="28"
+            FontWeight="Bold"
+            TextAlignment="Center"
+            TextWrapping="Wrap" />
+        <Button
+            x:Name="Confirm_Button"
+            Width="95"
+            Height="25"
+            Margin="518,595,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Confirm_Button_Click"
+            Content="确认" />
+        <Button
+            x:Name="Reset_Button"
+            Width="95"
+            Height="25"
+            Margin="627,595,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Reset_Button_Click"
+            Content="重置计分" />
+        <Label
+            x:Name="Throw_Exception"
+            Width="235"
+            Margin="500,625,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="" />
+
+
+    </Grid>
+</Window>
