@@ -14,7 +14,8 @@ namespace Calculator.src
         private string[] m_endings_text = { "海沫", "骑士", "蒂蒂", "水月", "锈锤", "寒灾", "墓碑" };
         private int[] ending_scores = { 0, 300, 160, 300, 160, 160, 160 };
         private string[] m_emergency_level =
-        {       "铳与秩序 60",
+        {       
+                "铳与秩序 60",
                 "领地意识 80",
                 "狩猎场 50",
                 "失控 150",
