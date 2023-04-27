@@ -12,7 +12,17 @@ namespace Calculator.src
     public class Calculate
     {
         private string[] m_endings_text = { "海沫", "骑士", "蒂蒂", "水月", "锈锤", "寒灾", "墓碑" };
-        private int[] ending_scores = { 0, 300, 160, 300, 160, 160, 160 };
+        // 结局分值
+        private int[] ending_scores =
+        {
+            0,      // 海沫
+            300,    // 骑士
+            160,    // 大蒂
+            300,    // 水月
+            160,    // 锈锤
+            160,    // 寒灾
+            160     // 墓碑
+        };
         private string[] m_emergency_level =
         {       
                 "铳与秩序 60",
@@ -39,18 +49,19 @@ namespace Calculator.src
             Shuihuoxiangrong = 8,
             Shendurenzhi = 9
         }
+        // 紧急作战关卡分值
         private int[] m_emergency_scores =
         {
-                60,
-                80,
-                50,
-                150,
-                90,
-                90,
-                50,
-                120,
-                150,
-                150
+                60,     // 铳与秩序
+                80,     // 领地意识
+                50,     // 狩猎场
+                150,    // 失控
+                90,     // 育生池
+                90,     // 好梦在何方
+                50,     // 机械之灾
+                120,    // 余烬方阵
+                150,    // 水火相容
+                150     // 深度认知
         };
         private string[] m_special_text =
         {
@@ -70,15 +81,25 @@ namespace Calculator.src
             Yabenyunzuo = 4,
             Jiangongxianchangshaya = 5
         }
+        // 特殊加分分值
         private int[] m_special_scores =
         {
-            50,
-            100,
-            50,
-            100,
-            80,
-            30
+            50,     // 真相通关
+            100,    // 真相无漏
+            50,     // 跳舞通关
+            100,    // 跳舞无漏+箱子全收
+            80,     // 鸭本运作
+            30      // 监工现场杀鸭
         };
+        // 道中加分分值
+        private int[] m_on_route_weights =
+        {
+            50, // 临时招募6星
+            20, // 临时招募5星
+            10, // 临时招募4星
+            20, // 鸭狗熊
+            0   // 启示
+        };   
 
         //scores
         private int m_total_score;
@@ -192,6 +213,7 @@ namespace Calculator.src
                         m_difficulty_err = false;
                     else if (type == 1)
                         m_collection_err = false;
+                    return int.Parse(s);
                 }
                 else
                 {
@@ -199,11 +221,8 @@ namespace Calculator.src
                         m_difficulty_err = true;
                     else if (type == 1)
                         m_collection_err = true;
-                }
-                if (s.Length > 0)
-                    return int.Parse(s);
-                else
                     return 0;
+                }
             }
             else
                 return 0;
@@ -228,11 +247,11 @@ namespace Calculator.src
         private int GetOnRouteAwards()
         {
             m_on_route_awards = 0;
-            m_on_route_awards += m_tempRecr_6s * 50;
-            m_on_route_awards += m_tempRecr_5s * 20;
-            m_on_route_awards += m_tempRecr_4s * 10;
-            m_on_route_awards += m_special_kills * 20;
-            m_on_route_awards += m_enlightenments * 0;
+            m_on_route_awards += m_tempRecr_6s * m_on_route_weights[0];
+            m_on_route_awards += m_tempRecr_5s * m_on_route_weights[1];
+            m_on_route_awards += m_tempRecr_4s * m_on_route_weights[2];
+            m_on_route_awards += m_special_kills * m_on_route_weights[3];
+            m_on_route_awards += m_enlightenments * m_on_route_weights[4];
             return m_on_route_awards;
         }
 
@@ -292,6 +311,12 @@ namespace Calculator.src
             if (m_difficulty == 0)
                 m_difficulty = 10;
         }
+
+        public void SetDifficultyDefault()
+        {
+            m_difficulty = 10;
+        }
+
         public int GetDifficulty()
         {
             return m_difficulty;

@@ -142,16 +142,28 @@ namespace Calculator
 
         private void Difficulty_Value_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            calculate.SetDifficulty(Difficulty_Value.Text);
-            if (util.IsOutOfValue(calculate.GetDifficulty()) && (!Difficulty_Value.Text.Equals("")))
+            
+            if (Difficulty_Value.Text.Equals("0"))
             {
-                calculate.SetDifficulty("0");
-                Difficulty_OutOfValue_Info.Content = "难度值应为数值且在11-15之间";
+                Difficulty_OutOfValue_Info.Content = "难度值应为数值且在1-15之间";
+                Difficulty_Value.Text = "";
+            }
+            else if (!int.TryParse(Difficulty_Value.Text, out int i))
+            {
+                calculate.SetDifficultyDefault();
+                Difficulty_Value.Text = "";
+                m_has_error = true;
+            }
+            else if (util.IsOutOfValue(int.Parse(Difficulty_Value.Text)) && (!Difficulty_Value.Text.Equals("")))
+            {
+                calculate.SetDifficultyDefault();
+                Difficulty_OutOfValue_Info.Content = "难度值应为数值且在1-15之间";
                 Difficulty_Value.Text = "";
                 m_has_error = true;
             }
             else
-            {                
+            {
+                calculate.SetDifficulty(Difficulty_Value.Text);
                 m_has_error = false;
                 Difficulty_OutOfValue_Info.Content = "";
             }
@@ -416,10 +428,18 @@ namespace Calculator
             {
                 calculate.SetCollectionAmout("0");
             }
+            else if (!int.TryParse(Collections_Amount.Text, out int i))
+            {
+                Collections_Amount.Text = "";
+                calculate.SetCollectionAmout("0");
+            }
+            else if (int.Parse(Collections_Amount.Text) < 0)
+            {
+                Collections_Amount.Text = "";
+                calculate.SetCollectionAmout("0");
+            }
             else
-            calculate.SetCollectionAmout(Collections_Amount.Text);
-
-
+                calculate.SetCollectionAmout(Collections_Amount.Text);
         }
 
         private void Confirm_Button_Click(object sender, RoutedEventArgs e)
