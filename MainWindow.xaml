@@ -627,8 +627,8 @@
             Margin="576,521,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            LostKeyboardFocus="Difficulty_Value_LostKeyboardFocus"
-            PreviewKeyDown="Difficulty_Value_PreviewKeyDown"
+            LostKeyboardFocus="GameScore_TextBox_LostKeyboardFocus"
+            PreviewKeyDown="GameScore_TextBox_PreviewKeyDown"
             TextWrapping="Wrap" />
         <Label
             x:Name="TotalScore_Label"
@@ -655,21 +655,37 @@
             TextAlignment="Center" />
         <Button
             x:Name="Confirm_Button"
-            Width="95"
+            Width="65"
             Height="25"
-            Margin="518,609,0,0"
+            Margin="513,609,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Confirm_Button_Click"
             Content="确认" />
         <Button
             x:Name="Reset_Button"
-            Width="95"
+            Width="65"
             Height="25"
-            Margin="627,609,0,0"
+            Margin="585,609,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Click="Reset_Button_Click"
             Content="重置计分" />
+        <Button
+            x:Name="Export_to_Excel"
+            Width="65"
+            Height="25"
+            Margin="657,609,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Click="Export_to_Excel_Click"
+            Content="导出"
+            ToolTip="导出本次记录到Excel表格，导出路径为C:\Users\win10\Documents，必须安装Microsoft Excel"
+            ToolTipService.InitialShowDelay="0" />
+        <Label
+            x:Name="Export_React"
+            Margin="661,629,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top" />
     </Grid>
 </Window>

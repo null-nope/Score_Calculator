@@ -24,6 +24,19 @@ namespace Calculator.src
             160     // 墓碑
         };
         private string[] m_emergency_level =
+        {
+            "铳与秩序",
+            "领地意识",
+            "狩猎场",
+            "失控",
+            "育生池",
+            "好梦在何方",
+            "机械之灾",
+            "余烬方阵",
+            "水火相容",
+            "深度认知"
+        };
+        private string[] m_emergency_level_text =
         {       
                 "铳与秩序 60",
                 "领地意识 80",
@@ -62,6 +75,15 @@ namespace Calculator.src
                 120,    // 余烬方阵
                 150,    // 水火相容
                 150     // 深度认知
+        };
+        private string[] m_special =
+        {
+            "真相通关",
+            "真相无漏",
+            "跳舞通关",
+            "跳舞无漏+箱子全收",
+            "鸭本运作",
+            "监工现场杀鸭"
         };
         private string[] m_special_text =
         {
@@ -107,6 +129,8 @@ namespace Calculator.src
         private int m_on_route_awards;
         private int m_emergency_score;
         private int m_special_score;
+        private int m_collection_score;
+        private int m_game_score;
         //difficulty
         private int m_difficulty;
         //endings
@@ -185,8 +209,8 @@ namespace Calculator.src
 
         private void Init_EmergencyState()
         {
-            m_emergency_state = new bool[m_emergency_level.Length];
-            for (int i = 0; i < m_emergency_level.Length; i++)
+            m_emergency_state = new bool[m_emergency_level_text.Length];
+            for (int i = 0; i < m_emergency_level_text.Length; i++)
                 m_emergency_state[i] = false;
         }
 
@@ -233,7 +257,7 @@ namespace Calculator.src
             return m_difficulty / 10.0;
         }
 
-        private int GetEndingScore()
+        private int SetEndingScore()
         {
             m_ending_score = 0;
             for (int i = 0; i < 7; i++)
@@ -244,7 +268,7 @@ namespace Calculator.src
             return m_ending_score;
         }
 
-        private int GetOnRouteAwards()
+        private int SetOnRouteAwards()
         {
             m_on_route_awards = 0;
             m_on_route_awards += m_tempRecr_6s * m_on_route_weights[0];
@@ -255,7 +279,7 @@ namespace Calculator.src
             return m_on_route_awards;
         }
 
-        private int GetEmergencyScore()
+        private int SetEmergencyScore()
         {
             m_emergency_score = 0;
             for (int i = 0; i < m_emergency_state.Length; i++)
@@ -266,7 +290,7 @@ namespace Calculator.src
             return m_emergency_score;
         }
 
-        private int GetSpecialScore()
+        private int SetSpecialScore()
         {
             m_special_score = 0;
             for (int i = 0; i < m_special_state.Length; i++)
@@ -277,19 +301,21 @@ namespace Calculator.src
             return m_special_score;
         }
 
-        private int GetCollectionScore()
+        private int SetCollectionScore()
         {
-            return m_collections * 10;
+            m_collection_score = m_collections * 10;
+            return m_collection_score;
         }
 
         private void CalculateTotalScore()
         {
             int total_score = 0;
-            total_score += GetEndingScore();
-            total_score += GetOnRouteAwards();
-            total_score += GetEmergencyScore();
-            total_score += GetSpecialScore();
-            total_score += GetCollectionScore();
+            total_score += m_game_score;
+            total_score += SetEndingScore();
+            total_score += SetOnRouteAwards();
+            total_score += SetEmergencyScore();
+            total_score += SetSpecialScore();
+            total_score += SetCollectionScore();
             total_score = (int)(total_score * GetCoefOfDifficulty());
             m_total_score = total_score;
         }
@@ -321,7 +347,7 @@ namespace Calculator.src
         {
             return m_difficulty;
         }
-        public string DisplayEndings()
+        public string GetEndings()
         {
             return m_endings_dis;
         }
@@ -464,7 +490,7 @@ namespace Calculator.src
         public string GetEmergencyLevelName(EmergencyLevel name)
         {
             int index = (int)name;
-            return m_emergency_level[index];
+            return m_emergency_level_text[index];
         }
 
         public bool HasEmergencyLevel(EmergencyLevel name)
@@ -541,6 +567,65 @@ namespace Calculator.src
             CalculateTotalScore();
             return m_total_score;
         }
+        public int GetEndingScore()
+        {
+            return m_ending_score;
+        }
 
+        public int GetOnRouteScore()
+        {
+            return m_on_route_awards;
+        }
+
+        public int GetEmergencyScore()
+        {
+            return m_emergency_score;
+        }
+
+        public int GetSpecialScore()
+        {
+            return m_special_score;
+        }
+
+        public int GetCollectionScore()
+        {
+            return m_collection_score;
+        }
+
+        public int GetCollectionAmount()
+        {
+            return m_collections;
+        }
+
+        public string GetEmergencyLevel()
+        {
+            string emergency_levels = "";
+            for(int i =0 ; i < m_emergency_state.Length; i++)
+            {
+                if (m_emergency_state[i])
+                    emergency_levels += m_emergency_level[i] + " ";
+            }
+            return emergency_levels;
+        }
+
+        public string GetSpecial()
+        {
+            string special = "";
+            for(int i=0; i < m_special_state.Length; i++)
+            {
+                if (m_special_state[i])
+                    special += m_special[i] + " ";
+            }
+            return special;
+        }
+        public void SetGameScore(string s)
+        {
+            m_game_score = Util.String2Int(s);
+        }
+
+        public int GetGameScore()
+        {
+            return m_game_score;
+        }
     }
 }

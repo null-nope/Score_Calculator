@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Calculator.src;
 using static Calculator.src.Calculate;
 
@@ -35,43 +37,43 @@ namespace Calculator
         private void HighMore_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_HighMore();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Qishi_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Qishi();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Skadi_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Skadi();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Mizuki_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Mizuki();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Xiuchui_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Xiuchui();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Hanzai_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Hanzai();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void Mubei_Click(object sender, RoutedEventArgs e)
         {
             calculate.HasEnding_Mubei();
-            Ending.Content = calculate.DisplayEndings();
+            Ending.Content = calculate.GetEndings();
         }
 
         private void TemporaryRecruit_6_Star_Add_Click(object sender, RoutedEventArgs e)
@@ -442,6 +444,30 @@ namespace Calculator
                 calculate.SetCollectionAmout(Collections_Amount.Text);
         }
 
+        private void GameScore_TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            util.Window_PreviewKeyDown(sender, e);
+        }
+        private void GameScore_TextBox_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (GameScore_TextBox.Text.Equals(""))
+            {
+                calculate.SetGameScore("0");
+            }
+            else if (!int.TryParse(GameScore_TextBox.Text, out int i))
+            {
+                GameScore_TextBox.Text = "";
+                calculate.SetGameScore("0");
+            }
+            else if (int.Parse(GameScore_TextBox.Text) < 0)
+            {
+                GameScore_TextBox.Text = "";
+                calculate.SetGameScore("0");
+            }
+            else
+                calculate.SetGameScore(GameScore_TextBox.Text);
+        }
+
         private void Confirm_Button_Click(object sender, RoutedEventArgs e)
         {
             TotalScore_TextBlock.Text = calculate.GetTotalScore().ToString();
@@ -495,6 +521,24 @@ namespace Calculator
             Collections_Amount.Text = "";
             GameScore_TextBox.Text = "";
             TotalScore_TextBlock.Text = "";
+            Export_React.Content = "";
+        }
+
+        
+        private void SetNull(object sender, EventArgs e)
+        {
+            Export_React.Content = "";
+
+        }
+        private DispatcherTimer showTimer = new DispatcherTimer();
+        private void Export_to_Excel_Click(object sender, RoutedEventArgs e)
+        {
+            Export_React.Content = "导出成功！";
+            showTimer.Tick += new EventHandler(SetNull);
+            showTimer.Interval = new TimeSpan(0, 0, 0, 3);
+            showTimer.Start();
+            Data.SavePlayerRecord(PlayerID.Text, Squad.Text,calculate);
+            DataExport.DataExportExcel();
         }
     }
 }

@@ -31,5 +31,10 @@ namespace Calculator.src
         {
             return value > max_difficulty || value < min_difficulty;
         }
+
+        public static int String2Int(string s)
+        {
+            return int.Parse(s);
+        }
     }
 }
