@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Calculator.src;
 using static Calculator.src.Calculate;
+using Calculator.windows;
 
 namespace Calculator
 {
@@ -539,6 +540,12 @@ namespace Calculator
             showTimer.Start();
             Data.SavePlayerRecord(PlayerID.Text, Squad.Text,calculate);
             DataExport.DataExportExcel();
+        }
+
+        private void Export_to_Excel_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SetExPathWin expathwin = new SetExPathWin();
+            expathwin.Show();
         }
     }
 }

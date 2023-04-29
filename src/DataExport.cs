@@ -11,7 +11,7 @@ namespace Calculator.src
 {
     internal class DataExport
     {
-        private static string m_file_path = "C:\\Users\\win10\\Documents\\datasave.xlsx";
+        private static string m_file_path = "C:\\Users\\Public\\Documents\\datasave.xlsx";
         public static void DataExportExcel()
         {
             Application excel = new Application();
@@ -109,13 +109,14 @@ namespace Calculator.src
 
         public static void SetSavePath(string path)
         {
-            m_file_path = path;
+            m_file_path = path + "\\DataSave.xlsx";
         }
 
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern int GetWindowThreadProcessId(IntPtr hwnd, out int ID);
 
-        public static bool Kill(Microsoft.Office.Interop.Excel.Application excel)
+        //强制关闭
+        public static bool Kill(Application excel)
         {
             try
             {
@@ -123,7 +124,7 @@ namespace Calculator.src
                 int tag = 0;
                 GetWindowThreadProcessId(t, out tag);   //获取本进程id
                 System.Diagnostics.Process p = System.Diagnostics.Process.GetProcessById(tag);   //获取此进程的引用
-                p.Kill();     //关闭进程，世界真美好
+                p.Kill();     //关闭进程
                 return true;
             }
             catch (Exception ex)
@@ -139,7 +140,7 @@ namespace Calculator.src
                 int intRel = 0;
                 do
                 {
-                    intRel = System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                    intRel = Marshal.ReleaseComObject(obj);
                 } while (intRel > 0);
             }
             catch (Exception ex)

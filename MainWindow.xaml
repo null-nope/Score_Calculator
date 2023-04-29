@@ -680,8 +680,8 @@
             VerticalAlignment="Top"
             Click="Export_to_Excel_Click"
             Content="导出"
-            ToolTip="导出本次记录到Excel表格，导出路径为C:\Users\win10\Documents，必须安装Microsoft Excel"
-            ToolTipService.InitialShowDelay="0" />
+            ToolTip="导出本次记录到Excel表格，右键点击设置导出路径，默认导出路径为C:\Users\win10\Documents，必须安装Microsoft Excel"
+            ToolTipService.InitialShowDelay="0" MouseRightButtonDown="Export_to_Excel_MouseRightButtonDown" />
         <Label
             x:Name="Export_React"
             Margin="661,629,0,0"
